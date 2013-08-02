@@ -106,6 +106,9 @@ Sub onEnterChat(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 	If pChatBtn->text <> "" Then
 		pGC->addMsg("Me", pChatBtn->text)
 		pGC->sendRaw("con|" + pChatBtn->text + ";")
+		
+		/' Add to history '/
+		pGC->guic.chatChk.lastChatEntered = pChatBtn->text
 	EndIf
 	
 	/' Reset text '/

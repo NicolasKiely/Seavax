@@ -213,6 +213,11 @@ Sub onTextBoxType(aGC As Any Ptr, pBtn As ButtonNode Ptr, char As String)
 		If pGC->guic.textPos < Len(pBtn->text) Then
 			pGC->guic.textPos += 1
 		EndIf
+	
+	ElseIf char = Chr(255) + Chr(&h48) Then
+		/' Up arrow key, load last message '/
+		pBtn->text = pGC->guic.chatChk.lastChatEntered
+		pGC->guic.textPos = Len(pBtn->text)
 		
 	ElseIf Asc(char) >= 32 And Asc(char) <= 126  Then
 		/' Add text '/
