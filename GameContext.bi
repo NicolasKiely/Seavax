@@ -74,6 +74,9 @@ Type GameContext
 	
 	/' Sends raw string to server, if connected '/
 	Declare Sub sendRaw(msg As String)
+	
+	/' Attempts to log in to an account '/
+	Declare Sub attemptLogin()
 End Type
 
 

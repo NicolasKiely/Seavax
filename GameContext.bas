@@ -145,6 +145,8 @@ End Sub
 
 
 Sub GameContext.sendRaw(msg As String)
+	If this.cm.sSock = -1 Then Exit Sub
+	
 	Dim As ZString Ptr pBuf = StrPtr(msg)
 	
 	Dim As Integer bSent = send(this.cm.sSock, pBuf, Len(msg), 0)
@@ -153,5 +155,16 @@ Sub GameContext.sendRaw(msg As String)
 		this.errMsg("SendRaw String failed!")
 	ElseIf bSent <> Len(msg) Then
 		this.errMsg("Didn't send entire message!")
+	EndIf
+End Sub
+
+
+Sub GameContext.attemptLogin()
+	Dim As String userName = this.guic.serverScrn.pbUserName->text
+	Dim As String password = this.guic.serverScrn.pbPassword->text
+	
+	If userName <> "" And password <> "" Then
+		/' Attempt to log in '/
+		this.sendRaw("gui|/acc/log/login -account '"+userName+"' -password '"+password+"';")
 	EndIf
 End Sub

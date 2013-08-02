@@ -75,6 +75,7 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	pbConnect->pOnClick = @onClickConnect()
 	pGC->buttons.addButton(pbConnect)
 	
+	/' Connection state button '/
 	pbConState = New ButtonNode()
 	pbConState->x = pMain->wdth * 0.50
 	pbConState->y = pMain->yOffset + pMain->hght*0.17
@@ -82,6 +83,7 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	pbConState->hght = 20
 	pbConState->text = "No Connection"
 	pbConState->pOnDraw = @drawConnectionState()
+	pbConState->pOnClick = @onClickConnectionState()
 	pGC->buttons.addButton(pbConState)
 	
 	
@@ -115,8 +117,12 @@ Sub onClickConnect(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 	Dim As String servIP = pGC->guic.serverScrn.pbServIP->text
 	Dim As String port = pGC->guic.serverScrn.pbPort->text
 	
+	/' Attempt connection '/
 	pGC->conState = ConnectionStates.connecting
 	pGC->cm.startConnection(servIP, port)
+	
+	
+	pGC->attemptLogin()
 End Sub
 
 
@@ -197,6 +203,8 @@ Sub drawConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 	
 	Else
 		/' Render connecting bar'/
+		pBtn->text = "Log on"
+		
 		Dim As Double t = Timer / 2
 		Dim As Double s
 		t = t - Int(t)
@@ -243,5 +251,21 @@ Sub drawConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 				EndIf
 			Next y
 		Next x
+		
+		Dim As Integer tx
+		Dim As Integer ty
+		
+		ty = pBtn->y + (pBtn->hght Shr 1)-4
+		tx = pBtn->x + (pBtn->wdth Shr 1)-(4*Len(pBtn->text))
+		
+		Color RGB(240, 240, 190)
+		Draw String (tx, ty), pBtn->Text
 	EndIf
+End Sub
+
+
+Sub onClickConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
+	Dim As GameContext Ptr pGC = CPtr(GameContext Ptr, aGC)
+	
+	pGC->attemptLogin()
 End Sub

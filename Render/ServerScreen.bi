@@ -69,3 +69,9 @@ Declare Sub onClickConnect(aGC As Any Ptr, pBtn As ButtonNode Ptr)
  ' Render the connection state indicator
  ---------------------------------------------------------------------------'/
 Declare Sub drawConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
+
+
+/'----------------------------------------------------------------------------
+ ' Attempts to login to an account
+ ---------------------------------------------------------------------------'/
+Declare Sub onClickConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
