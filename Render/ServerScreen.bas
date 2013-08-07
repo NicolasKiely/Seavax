@@ -118,8 +118,15 @@ Sub onClickConnect(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 	Dim As String port = pGC->guic.serverScrn.pbPort->text
 	
 	/' Attempt connection '/
-	pGC->conState = ConnectionStates.connecting
-	pGC->cm.startConnection(servIP, port)
+	If pBtn->text = "Connect" Then
+		pGC->conState = ConnectionStates.connecting
+		pGC->cm.startConnection(servIP, port)
+		
+	ElseIf pBtn->text = "Disconnect" Then
+		pGC->cm.closeSelf()
+		pBtn->text = "Connect"
+		pGC->conState = ConnectionStates.notConnected
+	EndIf
 	
 	
 	pGC->attemptLogin()

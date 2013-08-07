@@ -59,6 +59,8 @@ Sub ConMan.startConnection(ip As String, port As String)
 	Else
 		gcLogMsg("Connection value: " + Str(con))
 		
+		/' Change login button to log-out button '/
+		pGC->guic.serverScrn.pbConnect->text = "Disconnect"
 	EndIf
 	
 	Dim As Long wsae = WSAGetLastError
