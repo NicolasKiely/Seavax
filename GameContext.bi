@@ -51,6 +51,9 @@ Type GameContext
 	/' Update mouse-related data '/
 	Declare Sub updateMouse()
 	
+	/' Helper method for updateMouse() '/
+	Declare Sub updateMouseFromButtonList(pBtnList As ButtonList Ptr)
+	
 	/' Interpret keyboard input '/
 	Declare Sub updateKeyBoard()
 	

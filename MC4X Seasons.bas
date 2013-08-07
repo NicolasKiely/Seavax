@@ -72,11 +72,12 @@ Do Until 0
 	Cls
 	
 	/' Render to screen chunk buffers '/
-	renderChunks(@menu, @main, @sChat, @bChat, @gc.chat)
+	renderChunks(@menu, @main, @sChat, @bChat, @gc)
 	
 	/' Render chunks to screen '/
 	menu.renderToScreen()
 	main.renderToScreen()
+	gc.guic.serverScrn.buttons.renderButtons(@gc)
 	If gc.guic.expandChat = 0 Then
 		sChat.renderToScreen()
 	Else

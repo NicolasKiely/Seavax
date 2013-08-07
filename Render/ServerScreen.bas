@@ -19,52 +19,52 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	ptUserName = newLabelButton("User Name:")
 	ptUserName->x = pMain->wdth*0.02
 	ptUserName->y = pMain->yOffset + pMain->hght*0.03
-	pGC->buttons.addButton(ptUserName)
+	this.buttons.addButton(ptUserName)
 	
 	'pbUserName = New ButtonNode()
 	pbUserName = newTextButton(20)
 	pbUserName->x = pMain->wdth*0.18
 	pbUserName->y = pMain->yOffset + pMain->hght*0.03
 	pbUserName->pOnEnter = @onEnterUserName()
-	pGC->buttons.addButton(pbUserName)
+	this.buttons.addButton(pbUserName)
 	
 	/' Password label and button '/
 	ptPassword = newLabelButton("Password:")
 	ptPassword->x = pMain->wdth * 0.50
 	ptPassWord->y = pMain->yOffset + pMain->hght*0.03
-	pGC->buttons.addButton(ptPassword)
+	this.buttons.addButton(ptPassword)
 	
 	pbPassword = newTextButton(20)
 	pbPassword->x = pMain->wdth*0.66
 	pbPassword->y = pMain->yOffset + pMain->hght*0.03
 	pbPassword->pOnEnter = @onEnterPassword()
-	pGC->buttons.addButton(pbPassword)
+	this.buttons.addButton(pbPassword)
 	
 	/' Server IP label and button '/
 	ptServIP = newLabelButton("Server IP:")
 	ptServIP->x = pMain->wdth * 0.02
 	ptServIP->y = pMain->yOffset + pMain->hght*0.10
-	pGC->buttons.addButton(ptServIP)
+	this.buttons.addButton(ptServIP)
 	
 	pbServIP = newTextButton(20)
 	pbServIP->x = pMain->wdth * 0.18
 	pbServIP->y = pMain->yOffset + pMain->hght*0.10
 	pbServIP->text = "127.0.0.1"
 	pbServIP->pOnEnter = @onEnterServerIP()
-	pGC->buttons.addButton(pbServIP)
+	this.buttons.addButton(pbServIP)
 	
 	/' Server port label and button '/
 	ptPort = newLabelButton("Port #:")
 	ptPort->x = pMain->wdth * 0.50
 	ptPort->y = pMain->yOffSet + pMain->hght*0.10
-	pGC->buttons.addButton(ptPort)
+	this.buttons.addButton(ptPort)
 	
 	pbPort = newTextButton(20)
 	pbPort->x = pMain->wdth * 0.66
 	pbPort->y = pMain->yOffset + pMain->hght*0.10
 	pbPort->text = "6282"
 	pbPort->pOnEnter = @onClickConnect()
-	pGC->buttons.addButton(pbPort)
+	this.buttons.addButton(pbPort)
 	
 	/' Connection buttons '/
 	pbConnect = newGenericButton("Connect")
@@ -73,7 +73,7 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	pbConnect->wdth = pMain->wdth * 0.40
 	pbConnect->hght = 20
 	pbConnect->pOnClick = @onClickConnect()
-	pGC->buttons.addButton(pbConnect)
+	this.buttons.addButton(pbConnect)
 	
 	/' Connection state button '/
 	pbConState = New ButtonNode()
@@ -84,14 +84,14 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	pbConState->text = "No Connection"
 	pbConState->pOnDraw = @drawConnectionState()
 	pbConState->pOnClick = @onClickConnectionState()
-	pGC->buttons.addButton(pbConState)
+	this.buttons.addButton(pbConState)
 	
 	/' Lobby chatroom button '/
 	pbLobby = NewMultiButton((pMain->wdth/8) - 9, (pMain->hght/10)-20)
 	pbLobby->x = pMain->wdth * 0.02
 	pbLobby->y = pMain->yOffset + pMain->hght*0.25
 	pbLobby->pOnDraw = @drawLobbyChat()
-	pGC->buttons.addButton(pbLobby)
+	this.buttons.addButton(pbLobby)
 	
 	
 End Sub

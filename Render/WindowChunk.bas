@@ -27,7 +27,7 @@ End Sub
 
 Sub renderChunks(pMenu As WindowChunk Ptr, pMain As WindowChunk Ptr, _
                          pSChat As WindowChunk Ptr, pBChat As WindowChunk Ptr, _
-                         pChat As ChatList ptr)
+                         aGC As Any Ptr)
 	
 	pMenu->cleanBuffer()
 	pMain->cleanBuffer()
@@ -35,9 +35,9 @@ Sub renderChunks(pMenu As WindowChunk Ptr, pMain As WindowChunk Ptr, _
 	pBChat->cleanBuffer()
 	
 	renderMenuChunk(pMenu)
-	renderMainChunk(pMain)
+	renderMainChunk(pMain, aGC)
 	renderSmallChatChunk(pSChat)
-	renderBigChatChunk(pBChat, pSChat, pChat)
+	renderBigChatChunk(pBChat, pSChat, @CPtr(GameContext Ptr, aGC)->chat)
 End Sub
 
 
@@ -47,8 +47,12 @@ Sub renderMenuChunk(pMenu As WindowChunk Ptr)
 End Sub
 
 
-Sub renderMainChunk(pMain As WindowChunk Ptr)
+Sub renderMainChunk(pMain As WindowChunk Ptr, aGC As Any Ptr)
+	'Dim As GameContext Ptr pGC = CPtr(GameContext Ptr, aGC)
 	
+	'If pGC->tabState = TabStates.serverState Then
+	'	pGC->guic.serverScrn.buttons.renderButtons(aGC)
+	'EndIf
 End Sub
 
 

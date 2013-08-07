@@ -50,7 +50,7 @@ End Type
  ---------------------------------------------------------------------------'/
 Declare Sub renderChunks(pMenu As WindowChunk Ptr, pMain As WindowChunk Ptr, _
                          pSChat As WindowChunk Ptr, pBChat As WindowChunk Ptr, _
-                         pChat As ChatList Ptr)
+                         aGC As Any Ptr)
 
 
 /'----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ Declare Sub renderMenuChunk(pMenu As WindowChunk Ptr)
 /'----------------------------------------------------------------------------
  ' Renders the main chunk of the screen
  ---------------------------------------------------------------------------'/
-Declare Sub renderMainChunk(pMain As WindowChunk Ptr)
+Declare Sub renderMainChunk(pMain As WindowChunk Ptr, aGC As Any Ptr)
 
 
 /'----------------------------------------------------------------------------

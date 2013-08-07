@@ -26,6 +26,10 @@ Type ServerScreen
 	Dim As ButtonNode Ptr pbLobby
 	
 	
+	/' Button list '/
+	Dim As ButtonList buttons
+	
+	
 	/' Main screen window chunk '/
 	Dim As WindowChunk Ptr pMain
 	

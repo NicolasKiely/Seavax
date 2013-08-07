@@ -3,6 +3,8 @@ Type MouseContext
 	Dim x As Integer
 	Dim y As Integer
 	
+	Dim clicky As Integer
+	
 	/' How long since last click '/
 	'Dim tLastClick As Double
 	

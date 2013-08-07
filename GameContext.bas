@@ -24,15 +24,24 @@ End Destructor
 
 
 Sub GameContext.updateMouse()
-	Dim As Integer clicky
-	Dim As ButtonNode Ptr pNode
-	
-	
 	/' Get mouse data '/
-	GetMouse(this.mc.x, this.mc.y, , clicky)
+	GetMouse(this.mc.x, this.mc.y, , this.mc.clicky)
 	
 	/' Check buttons against mouse '/
-	pNode = this.buttons.pButton
+	this.updateMouseFromButtonList(@this.buttons)
+	
+	Select Case As Const this.tabState
+		Case TabStates.serverState:
+			this.updateMouseFromButtonList(@this.guic.serverScrn.buttons)
+	End Select
+	
+	
+End Sub
+
+
+Sub GameContext.updateMouseFromButtonList(pBtnList As ButtonList Ptr)
+	Dim As ButtonNode Ptr pNode = pBtnList->pButton
+	
 	While pNode <> 0
 		/' Skip disabled buttons '/
 		If pNode->isEnabled = 0 Then
@@ -46,7 +55,7 @@ Sub GameContext.updateMouse()
 				/' Set button as active '/
 				pNode->isActive = -1
 				
-				If clicky = 1 Then
+				If this.mc.clicky = 1 Then
 					/' Mouse button held '/
 					this.mc.isHeld = -1
 					
