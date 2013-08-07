@@ -26,11 +26,11 @@
 /' Immediate todo: parsing table packets, server lobby '/
 
 /' TODO: Menu organization
- '  [ ] Server connection: Server login/server communication
+ '  [.] Server connection: Server login/server communication
  '    - [.] Button
  '		- [ ] Admin controls
  '		- [ ] Lobby chat
- '		- [.] Connect to server
+ '		- [X] Connect to server
  '  [ ] Game map
  '		- [.] Button
  '		- [ ] Map grid

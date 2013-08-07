@@ -57,23 +57,41 @@ End Sub
 
 Sub drawExpandButton(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 	defaultDrawButton(aGC, pBtn)
+	Dim As GameContext Ptr pGC = CPtr(GameContext Ptr, aGC)
 	
 	Color RGB(50, 20, 20)
 	/' Vertical bar '/
 	Line  (pBtn->x + pBtn->wdth*0.46, pBtn->y + pBtn->hght*0.15) - _
 			(pBtn->x + pBtn->wdth*0.54, pBtn->y + pBtn->hght*0.85),,BF
 	
-	/' Top horizontal bar '/
-	Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.15) - _
-			(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.25),,BF
-			
-	/' Left flank '/
-	Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.15) - _
-			(pBtn->x + pBtn->wdth*0.26, pBtn->y + pBtn->hght*0.50),,BF
+	If pGC->guic.expandChat = 0 Then
+		/' Top horizontal bar '/
+		Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.15) - _
+				(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.25),,BF
+				
+		/' Left flank '/
+		Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.15) - _
+				(pBtn->x + pBtn->wdth*0.26, pBtn->y + pBtn->hght*0.50),,BF
+		
+		/' Right flank '/
+		Line  (pBtn->x + pBtn->wdth*0.74, pBtn->y + pBtn->hght*0.15) - _
+				(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.50),,BF
+		
+	Else
+		/' Bottom horizontal bar '/
+		Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.75) - _
+				(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.85),,BF
+				
+		/' Left flank '/
+		Line  (pBtn->x + pBtn->wdth*0.20, pBtn->y + pBtn->hght*0.50) - _
+				(pBtn->x + pBtn->wdth*0.26, pBtn->y + pBtn->hght*0.85),,BF
+		
+		/' Right flank '/
+		Line  (pBtn->x + pBtn->wdth*0.74, pBtn->y + pBtn->hght*0.50) - _
+				(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.85),,BF
+		
+	End If
 	
-	/' Right flank '/
-	Line  (pBtn->x + pBtn->wdth*0.74, pBtn->y + pBtn->hght*0.15) - _
-			(pBtn->x + pBtn->wdth*0.80, pBtn->y + pBtn->hght*0.50),,BF
 End Sub
 
 
