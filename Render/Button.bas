@@ -101,6 +101,20 @@ Function newGenericButton(btnText As String) As ButtonNode Ptr
 End Function
 
 
+Function newMultiButton(colWdth As Integer, rowHght As Integer) As ButtonNode Ptr
+	Dim As ButtonNode Ptr pBtn
+	
+	pBtn = New ButtonNode()
+	pBtn->actColor = RGB(0, 7, 0)
+	pBtn->inaColor = RGB(15, 15, 30)
+	pBtn->wdth = 6 + 8*colWdth
+	pBtn->hght = 6 + 10*rowHght
+	
+	
+	Return pBtn
+End Function
+
+
 Sub ButtonList.addButton(pNewButton As ButtonNode Ptr)
 	If this.pButton = 0 Then
 		this.pButton = pNewButton

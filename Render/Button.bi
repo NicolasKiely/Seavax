@@ -88,6 +88,12 @@ Declare Function newGenericButton(btnText As String) As ButtonNode Ptr
 
 
 /'----------------------------------------------------------------------------
+ ' Generate default multi-line button
+ ---------------------------------------------------------------------------'/
+Declare Function newMultiButton(colWdth As Integer, rowHght As Integer) As ButtonNode Ptr
+
+
+/'----------------------------------------------------------------------------
  ' Default button renderer, just draws background
  ---------------------------------------------------------------------------'/
 Declare Sub defaultDrawButton(aGC As Any Ptr, pBtn As ButtonNode Ptr)

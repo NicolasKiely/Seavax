@@ -86,6 +86,13 @@ Sub ServerScreen.setUpChunk(aGC As Any Ptr, pChunk As WindowChunk Ptr)
 	pbConState->pOnClick = @onClickConnectionState()
 	pGC->buttons.addButton(pbConState)
 	
+	/' Lobby chatroom button '/
+	pbLobby = NewMultiButton((pMain->wdth/8) - 9, (pMain->hght/10)-20)
+	pbLobby->x = pMain->wdth * 0.02
+	pbLobby->y = pMain->yOffset + pMain->hght*0.25
+	pbLobby->pOnDraw = @drawLobbyChat()
+	pGC->buttons.addButton(pbLobby)
+	
 	
 End Sub
 
@@ -144,6 +151,7 @@ Sub ServerScreen.hide()
 	this.ptPort->isEnabled = 0
 	this.pbConnect->isEnabled = 0
 	this.pbConState->isEnabled = 0
+	this.pbLobby->isEnabled = 0
 End Sub
 
 
@@ -158,6 +166,7 @@ Sub ServerScreen.awaken()
 	this.ptPort->isEnabled = -1
 	this.pbConnect->isEnabled = -1
 	this.pbConState->isEnabled = -1
+	this.pbLobby->isEnabled = -1
 End Sub
 
 
@@ -268,6 +277,27 @@ Sub drawConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 		Color RGB(240, 240, 190)
 		Draw String (tx, ty), pBtn->Text
 	EndIf
+End Sub
+
+
+Sub drawLobbyChat(aGC As Any Ptr, pBtn As ButtonNode Ptr)
+	Dim As GameContext Ptr pGC = CPtr(GameContext Ptr, aGC)
+	
+	Dim As Integer bx1 = pBtn->x+8
+	Dim As Integer by1 = pBtn->y+8
+	Dim As Integer bx2 = pBtn->x + pBtn->wdth - 8
+	Dim As Integer by2 = pBtn->y + pBtn->hght - 8
+	
+	/' Render border '/
+	Color pBtn->inaColor
+	Line (pBtn->x, pBtn->y) - (pBtn->x + pBtn->wdth, by1-1),,BF  ' Top
+	Line (bx2+1, by1) - (pBtn->x + pBtn->wdth, pBtn->y + pBtn->hght),,BF ' Right
+	Line (pBtn->x, by1) - (bx1-1, pBtn->y + pBtn->hght),,BF ' Left
+	Line (bx1, by2+1) - (bx2, pBtn->y + pBtn->hght),,BF ' Bottom
+	
+	/' Render background '/
+	Color pBtn->actColor
+	Line (bx1, by1) - (bx2, by2),,BF
 End Sub
 
 

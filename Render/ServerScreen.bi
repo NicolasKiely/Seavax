@@ -23,6 +23,8 @@ Type ServerScreen
 	Dim As ButtonNode Ptr pbConnect
 	Dim As ButtonNode Ptr pbConState
 	
+	Dim As ButtonNode Ptr pbLobby
+	
 	
 	/' Main screen window chunk '/
 	Dim As WindowChunk Ptr pMain
@@ -69,6 +71,12 @@ Declare Sub onClickConnect(aGC As Any Ptr, pBtn As ButtonNode Ptr)
  ' Render the connection state indicator
  ---------------------------------------------------------------------------'/
 Declare Sub drawConnectionState(aGC As Any Ptr, pBtn As ButtonNode Ptr)
+
+
+/'----------------------------------------------------------------------------
+ ' Render the connection state indicator
+ ---------------------------------------------------------------------------'/
+Declare Sub drawLobbyChat(aGC As Any Ptr, pBtn As ButtonNode Ptr)
 
 
 /'----------------------------------------------------------------------------
