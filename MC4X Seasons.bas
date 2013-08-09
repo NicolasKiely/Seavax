@@ -23,7 +23,7 @@
  '		None							Default (local chat?)
  '/
 
-/' Immediate todo: parsing table packets, server lobby '/
+/' Immediate todo: parsing table packets with tables, server lobby '/
 
 /' TODO: Menu organization
  '  [.] Server connection: Server login/server communication
