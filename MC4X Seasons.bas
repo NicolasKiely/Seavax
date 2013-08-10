@@ -28,12 +28,12 @@
 /' TODO: Menu organization
  '  [.] Server connection: Server login/server communication
  '    - [.] Button
- '		- [ ] Admin controls
- '		- [ ] Lobby chat
+ '		- [.] Lobby chat
  '		- [X] Connect to server
  '  [ ] Game map
  '		- [.] Button
  '		- [ ] Map grid
+ '    - [ ] Find/join game 
  '  [ ] Chat History
  '		- [.] Button
  '		- [ ] Chat list

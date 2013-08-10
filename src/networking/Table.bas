@@ -328,3 +328,9 @@ Function Table.findValue(key As String) As String
 	
 	Return results
 End Function
+
+
+Function streamTable(ppWork As Table Ptr Ptr, ppRes As Table Ptr Ptr, _
+							zMark As ZString Ptr) As ZString Ptr
+	
+End Function

@@ -4,6 +4,8 @@
 
 #Include Once "win/winsock.bi"
 
+#Include Once "table.bi"
+
 Type ConMan
 	/' Windows network thingy '/
 	Dim As WSAData wdat
