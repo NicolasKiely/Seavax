@@ -1,6 +1,6 @@
 #Include Once "ChatChunk.bi"
-#Include Once "GameContext.bi"
 #Include Once "Button.bi"
+#Include Once "../contexts/GameContext.bi"
 
 
 Sub ChatChunk.setUpChunk(aGC As Any Ptr, pSChunk As WindowChunk Ptr, pBChunk As WindowChunk Ptr)

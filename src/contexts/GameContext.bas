@@ -3,7 +3,7 @@
  ---------------------------------------------------------------------------'/
 
 #Include Once "GameContext.bi"
-#Include Once "ChatList.bi"
+#Include Once "../ChatList.bi"
 
 
 Constructor GameContext()

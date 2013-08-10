@@ -1,9 +1,9 @@
-#Include Once "ChatList.bi"
-#Include Once "Render/Button.bi"
-#Include Once "MouseContext.bi"
-#Include Once "Render/ServerScreen.bi"
 #Include Once "GUIContext.bi"
-#Include Once "ConMan.bi"
+#Include Once "MouseContext.bi"
+#Include Once "../ChatList.bi"
+#Include Once "../gui/Button.bi"
+#Include Once "../gui/ServerScreen.bi"
+#Include Once "../networking/ConMan.bi"
 
 #Define CLIENT_AUTHOR "#CLIENT#"
 

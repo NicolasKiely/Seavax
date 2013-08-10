@@ -1,7 +1,7 @@
 #Include Once "WindowChunk.bi"
-#Include Once "Render/Button.bi"
-#Include Once "GameContext.bi"
-#Include Once "ChatList.bi"
+#Include Once "Button.bi"
+#Include Once "../contexts/GameContext.bi"
+#Include Once "../ChatList.bi"
 
 Constructor WindowChunk(newW As Integer, newH As Integer, newO As Integer)
 	this.wdth = newW

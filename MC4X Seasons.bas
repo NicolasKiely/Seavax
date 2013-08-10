@@ -1,9 +1,9 @@
 #Include Once "win/winsock.bi"
 
-#Include Once "Render/WindowChunk.bi"
-#Include Once "Render/ChatChunk.bi"
-#Include Once "Render/ServerScreen.bi"
-#Include Once "GameContext.bi"
+#Include Once "src/gui/WindowChunk.bi"
+#Include Once "src/gui/ChatChunk.bi"
+#Include Once "src/gui/ServerScreen.bi"
+#Include Once "src/contexts/GameContext.bi"
 
 
 /' Rendering:

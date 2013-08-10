@@ -3,7 +3,7 @@
  ' Window chunks are stacked vertically on each other
  ---------------------------------------------------------------------------'/
 
-#Include Once "ChatList.bi"
+#Include Once "../ChatList.bi"
 
 /' Screen Dimensions '/
 #Define SCRN_WDTH 640

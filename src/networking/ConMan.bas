@@ -1,7 +1,8 @@
-#Include Once "ConMan.bi"
 #Include Once "win/winsock.bi"
-#Include Once "GameContext.bi"
+
 #Include Once "table.bi"
+#Include Once "ConMan.bi"
+#Include Once "../contexts/GameContext.bi"
 
 
 Constructor ConMan()

@@ -2,8 +2,8 @@
  ' Manges top-level GUI for game context
  ---------------------------------------------------------------------------'/
 
-#Include Once "Render/ServerScreen.bi"
-#Include Once "Render/ChatChunk.bi"
+#Include Once "../gui/ServerScreen.bi"
+#Include Once "../gui/ChatChunk.bi"
  
 Type GUIContext
 	/' Cursor position in text field '/

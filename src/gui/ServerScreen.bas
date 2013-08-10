@@ -1,6 +1,6 @@
 #Include Once "ServerScreen.bi"
 #Include Once "Button.bi"
-#Include Once "GameContext.bi"
+#Include Once "../contexts/GameContext.bi"
 
 
 Constructor ServerScreen()

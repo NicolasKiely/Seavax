@@ -16,7 +16,7 @@ End Destructor
 
 Function Fld.rToString() As String
 	If this.pNext <> 0 Then
-		Return this.value + Chr(9) + this.pNext->rToString()
+		Return this.value + CHR_FIELD_DELIMITER + this.pNext->rToString()
 	Else
 		Return this.value
 	EndIf
@@ -181,81 +181,6 @@ Function Table.appendField(text As String) As Integer
 End Function
 
 
-Function loadTableFromFile(fileName As String) As Table Ptr
-	/' Create table '/
-	Dim As Table Ptr pTable = New Table()
-	If pTable = 0 Then Return 0
-	
-	
-	/' Attempt to open up file '/
-	Dim As Integer fh = FreeFile()
-	Open fileName For Input As #fh
-	Dim As Integer e = Err
-	If e = 2 Or e = 3 Then
-		Return 0
-	EndIf
-	
-	/' Set title '/
-	pTable->addToHeader(fileName)
-	
-	/' Load up columns '/
-	Dim As String colLine
-	Line Input #fh, colLine
-	
-	/' Error, no columns '/
-	If Len(colLine) = 0 Then 
-		Close #fh
-		Delete pTable
-		Return 0
-	EndIf
-	
-	Dim As String tempBuf = ""
-	For i As Integer = 0 To Len(colLine) - 1
-		Dim As UByte c = colLine[i]
-		
-		If c = 9 Then
-			/' Tab '/
-			If pTable->addToColumn(tempBuf) Then
-				Close #fh
-				Delete pTable
-				Return 0
-			EndIf
-			tempBuf = ""
-		
-		Else
-			tempBuf += Chr(c)
-
-		EndIf
-	Next
-	/' Add last column '/
-	If pTable->addToColumn(tempBuf) Then
-		Close #fh
-		Delete pTable
-		Return 0
-	EndIf
-
-	
-	/' Load records '/
-	While Eof(fh) = 0
-		'Print "Loading record field"
-		
-		Dim As String recBuf
-		Line Input #fh, recBuf
-		
-		If pTable->addRecord(loadRecordFromString(recBuf)) Then
-			Close #fh
-			Delete pTable
-			Return 0
-		EndIf
-		
-	Wend
-	
-	
-	Close #fh
-	Return pTable
-End Function
-
-
 Function loadRecordFromString(recStr As String) As Record Ptr
 	Dim As Record Ptr pRec = New Record()
 	If pRec = 0 Then Return 0
@@ -289,32 +214,32 @@ End Function
 Function Table.toString() As String
 	Dim As String tabStr = ""
 	Dim As Record Ptr pTemp
-	Dim As String d = Chr(10)' + Chr(13)
 	
 	/' Header '/
 	If this.pHeader <> 0 Then
 		tabStr = pHeader->rToString()
 	EndIf
-	tabStr += d
+	tabStr += CHR_TABLE_DELIMITER
 	
 	/' Columns '/
 	If this.pCol <> 0 Then
 		tabStr += pCol->rToString()
 	EndIf
-	tabStr += d
+	tabStr += CHR_TABLE_DELIMITER
 	
 	/' Records '/
 	pTemp = this.pRec
-	
 	While pTemp <> 0
 		tabStr += pTemp->pFld->rToString()
 		
 		If pTemp->pNext <> 0 Then
-			tabStr += d
+			/' Append extra field delimiter between records '/
+			tabStr += CHR_FIELD_DELIMITER
 		EndIf
 		
 		pTemp = pTemp->pNext
 	Wend
+	tabStr += CHR_TABLE_DELIMITER
 
 	Return tabStr
 End Function
