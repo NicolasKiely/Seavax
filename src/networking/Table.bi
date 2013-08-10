@@ -54,6 +54,9 @@ Type Record
 	/' Next record in table '/
 	Dim As Record Ptr pNext
 	
+	/' Number of fields in record '/
+	Dim As Integer fldNum
+	
 	/' Adds field to record. Returns 0 on success '/
 	Declare Function addField(text As String) As Integer
 	
@@ -119,14 +122,3 @@ End Type
  ' Turns a tab-delimited string to a record structure
  ---------------------------------------------------------------------------'/
 Declare Function loadRecordFromString(recStr As String) As Record Ptr
-
-
-/'----------------------------------------------------------------------------
- ' Iteratively builds up a table from a streaming string buffer
- ' ppWork is the pointer to the working buffer reference. Managed by function
- ' ppRes is the pointer to the results reference. Null unless results ready
- ' zMark is the string ptr starting at the last left off place. Managed by function
- ' Returns updated string marker
- ---------------------------------------------------------------------------'/
-Declare Function streamTable(ppWork As Table Ptr Ptr, ppRes As Table Ptr Ptr, _
-										zMark As ZString Ptr) As ZString Ptr

@@ -28,8 +28,9 @@ TabOrder=1,10,1008
 9=src\contexts\GUIContext.bi
 1008=src\networking\ConMan.bas
 10=src\networking\ConMan.bi
-1009=
+1009=src\networking\TableStream.bas
 11=src\networking\Table.bi
+12=src\networking\TableStream.bi
 [BreakPoint]
 1=
 2=
@@ -51,6 +52,7 @@ TabOrder=1,10,1008
 1008=
 1009=
 11=
+12=
 [FileInfo]
 1=0,35,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2=0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
