@@ -14,9 +14,9 @@ Destructor Fld()
 End Destructor
 
 
-Function Fld.rToString() As String
+Function Fld.rToString(delim As String) As String
 	If this.pNext <> 0 Then
-		Return this.value + CHR_FIELD_DELIMITER + this.pNext->rToString()
+		Return this.value + delim + this.pNext->rToString(delim)
 	Else
 		Return this.value
 	EndIf
@@ -217,20 +217,20 @@ Function Table.toString() As String
 	
 	/' Header '/
 	If this.pHeader <> 0 Then
-		tabStr = pHeader->rToString()
+		tabStr = pHeader->rToString(CHR_FIELD_DELIMITER)
 	EndIf
 	tabStr += CHR_TABLE_DELIMITER
 	
 	/' Columns '/
 	If this.pCol <> 0 Then
-		tabStr += pCol->rToString()
+		tabStr += pCol->rToString(CHR_FIELD_DELIMITER)
 	EndIf
 	tabStr += CHR_TABLE_DELIMITER
 	
 	/' Records '/
 	pTemp = this.pRec
 	While pTemp <> 0
-		tabStr += pTemp->pFld->rToString()
+		tabStr += pTemp->pFld->rToString(CHR_FIELD_DELIMITER)
 		
 		If pTemp->pNext <> 0 Then
 			/' Append extra field delimiter between records '/

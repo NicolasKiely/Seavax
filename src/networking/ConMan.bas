@@ -1,8 +1,9 @@
 #Include Once "win/winsock.bi"
 
-#Include Once "table.bi"
+#Include Once "Table.bi"
 #Include Once "ConMan.bi"
 #Include Once "../contexts/GameContext.bi"
+#Include Once "TableStream.bi"
 
 
 Constructor ConMan()
@@ -12,6 +13,11 @@ Constructor ConMan()
 	EndIf
 	
 	this.sSock = -1
+	
+	this.pWorking = 0
+	this.pRes = 0
+	this.zMark = 0
+	this.tableState = TableStreamStates.HEADER_STATE
 End Constructor
 
 
@@ -89,6 +95,22 @@ Sub ConMan.gcLogMsg(msg As String)
 End Sub
 
 
+Sub ConMan.gcLogTab(pTable As Table Ptr)
+	If pTable = 0 Then Exit Sub
+	
+	/' Header '/
+	this.gcLogMsg("#TABLE#: " + pTable->pHeader->rToString(" , "))
+	this.gcLogMsg(pTable->pCol->rToString(" | "))
+	
+	/' Body '/
+	Dim As Record Ptr pTempRec = pTable->pRec
+	While pTempRec <> 0
+		this.gcLogMsg(pTempRec->pFld->rToString(" | "))
+		pTempRec = pTempRec->pNext
+	Wend
+End Sub
+
+
 Sub ConMan.listenToServer()
 	If this.sSock <> -1 Then
 		Dim As GameContext Ptr pGC = CPtr(GameContext Ptr, aGC)
@@ -103,11 +125,13 @@ Sub ConMan.listenToServer()
 		tv.tv_sec = 0
 		tv.tv_usec = 0
 		
+		/' Check socket for reading '/
 		selectSocket(this.sSock+1, @readSet, 0, 0, @tv)
 		
 		If fd_isSet(this.sSock, @readSet) Then
 			Dim As ZString Ptr pBuf = Callocate(250)
 			
+			/' Get buffer, make sure to keep last char null '/
 			Dim As Integer datLen = recv(this.sSock, pBuf, 249, 0)
 			pBuf[249] = 0
 			
@@ -122,16 +146,55 @@ Sub ConMan.listenToServer()
 				pGC->conState = ConnectionStates.connectionLost
 				
 			Else
+				/' Process into table '/
+				If this.zMark = 0 Then this.zMark = pBuf
 				
-				/' DEBUG '/
-				For i As Integer = 0 To 249
-					If pBuf[i] = 9 Then pBuf[i] = 124
-					If pBuf[i] = 10 Then pBuf[i] = 58
-					If pBuf[i] = 13 Then pBuf[i] = 59
-				Next
+				/' Run FSM parser on byte stream in '/
+				Dim As ZString Ptr zRes = streamTable(@this.pWorking, @this.pRes, this.zMark, @this.tableState)
+				/'While zRes <> this.zMark And this.pRes = 0
+					this.zMark = zRes
+					zRes = streamTable(@this.pWorking, @this.pRes, this.zMark, @this.tableState)
+				Wend'/
+				If this.zMark = zRes Then
+					Delete this.pRes
+					this.pRes = 0
+				EndIf
 				
-				this.gcLogMsg("#Server#: " + *pbuf)
+				this.zMark = zRes
 				
+				/' DEBUG: printing table to log '/
+				/' TODO: Handle table packets (also put streamTable in loop till done reading) '/
+				If this.pRes <> 0 Then
+					/' Finished parsing a table packet '/
+					this.gcLogTab(this.pRes)
+					
+					/'
+					this.gcLogMsg("#Server#: " + this.pRes->pHeader->rToString(" , "))
+					this.gcLogMsg(this.pRes->pCol->rToString(" | "))
+					
+					Dim As Record Ptr pTempRec = this.pRes->pRec
+					While pTempRec <> 0
+						this.gcLogMsg(pTempRec->pFld->rToString(" | "))
+						
+						pTempRec = pTempRec->pNext
+					Wend
+					'/
+					
+					/' Reset reading state '/
+					Delete this.pRes
+					this.pRes = 0
+					
+					Delete this.pWorking
+					this.pWorking = New Table()
+					
+					this.tableState = TableStreamStates.HEADER_STATE
+					this.zMark = 0
+					
+				Else
+					this.gcLogMsg("Not finished parsing table")
+					this.gcLogMsg("Stream state #" + Str(this.tableState))
+					this.gcLogTab(this.pWorking)
+				End If
 			EndIf
 			
 			DeAllocate(pBuf)
