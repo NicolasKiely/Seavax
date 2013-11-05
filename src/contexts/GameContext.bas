@@ -144,6 +144,11 @@ End Sub
 
 
 Sub GameContext.logMsg(msg As String)
+	For i As Integer = 0 To Len(msg)
+		If msg[i] = 9 Then msg[i] = Asc(",")
+		If msg[i] = 10 Then msg[i] = Asc(";")
+	Next
+	
 	this.chat.addMsg(CLIENT_AUTHOR, msg)
 End Sub
 
@@ -174,6 +179,6 @@ Sub GameContext.attemptLogin()
 	
 	If userName <> "" And password <> "" Then
 		/' Attempt to log in '/
-		this.sendRaw("gui|/acc/log/login -account '"+userName+"' -password '"+password+"';")
+		this.sendRaw(!"gui|/acc/log/login -account \"" + userName+ !"\" -password \""+password+!"\";")
 	EndIf
 End Sub

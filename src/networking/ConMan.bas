@@ -139,11 +139,13 @@ Sub ConMan.listenToServer()
 				this.gcLogMsg("Socket closed!")
 				this.closeSelf()
 				pGC->conState = ConnectionStates.notConnected
+				pGC->guic.serverScrn.pbConnect->text="Connect"
 				
 			ElseIf datLen = -1 Then
 				this.gcErrMsg("Socket read error!")
 				this.closeSelf()
 				pGC->conState = ConnectionStates.connectionLost
+				pGC->guic.serverScrn.pbConnect->text="Connect"
 				
 			Else
 				/' Process into table '/

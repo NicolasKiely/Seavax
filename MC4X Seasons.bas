@@ -66,6 +66,16 @@ gc.guic.chatChk.setUpChunk(@gc, @sChat, @bChat)
 
 gc.setState(TabStates.serverState)
 
+Dim As Table fooTable
+fooTable.addToHeader("Head 1")
+fooTable.addToHeader("Head 2")
+fooTable.addToColumn("Col 1")
+fooTable.addToColumn("Col 2")
+fooTable.addRecord(loadRecordFromString(!"Fld 1\tFld 2"))
+fooTable.addRecord(loadRecordFromString(!"Fld 3\tFld 4"))
+
+gc.logMsg(fooTable.toString())
+
 Do Until 0
 	Sleep 10
 	ScreenLock
