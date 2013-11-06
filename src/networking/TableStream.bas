@@ -75,7 +75,7 @@ Function streamTable(ppWork As Table Ptr Ptr, ppRes As Table Ptr Ptr, _
 					
 				Else
 					/' Add to current field '/
-					pHeader->value += zNew[0]
+					pHeader->value += Left(*zNew,1)
 				EndIf
 				
 			Case TableStreamStates.COLUMN_STATE:
@@ -93,7 +93,7 @@ Function streamTable(ppWork As Table Ptr Ptr, ppRes As Table Ptr Ptr, _
 					
 				Else
 					/' Add to current field '/
-					pCol->value += zNew[0]
+					pCol->value += Left(*zNew, 1)
 				EndIf
 				
 			Case TableStreamStates.RECORD_STATE:
@@ -130,7 +130,7 @@ Function streamTable(ppWork As Table Ptr Ptr, ppRes As Table Ptr Ptr, _
 					
 				Else
 					/' Add to current field '/
-					pFld->value += zNew[0]
+					pFld->value += Left(*zNew, 1)
 				EndIf
 		End Select
 		
